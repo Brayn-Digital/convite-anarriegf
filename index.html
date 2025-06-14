@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anarriê da Grande Família 2025!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lilita+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-image: url('tramadepalha.jpg'); 
+            background-size: 300px; 
+            background-repeat: repeat; 
+        }
+
+        .title-font { 
+            font-family: 'Lilita One', cursive; 
+            color: #FDE047; /* Amarelo vibrante */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .card { 
+            border: 4px solid #D97706; 
+            border-style: dashed;
+            opacity: 0; 
+            transition: opacity 1s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            background-color: #0c143d; 
+            overflow: hidden;
+        }
+
+        .content-area {
+            background-image: url('fundo.jpg');
+            background-size: cover;
+            background-position: center center;
+            color: #FFFFFF;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        
+        .info-card {
+            background-image: 
+                linear-gradient(rgba(12, 20, 61, 0.7), rgba(12, 20, 61, 0.7)), 
+                url('tecido%20quadriculado.jpg');
+            background-size: cover, 250px;
+            background-repeat: no-repeat, repeat;
+            border-radius: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 1.5rem;
+        }
+
+        .info-card p,
+        .info-card li {
+            font-size: 1.25rem;
+            line-height: 2rem;
+        }
+
+        .lista-junina { list-style: none; padding: 0; columns: 2; -webkit-columns: 2; -moz-columns: 2; }
+        
+        .lista-junina li::before { margin-right: 8px; }
+        .lista-junina li:nth-child(1)::before { content: '🌽'; }
+        .lista-junina li:nth-child(2)::before { content: '🥟'; }
+        .lista-junina li:nth-child(3)::before { content: '🍲'; }
+        .lista-junina li:nth-child(4)::before { content: '🍺'; }
+        
+        .rodape-casinhas { background-image: url('casinhas.png'); background-size: cover; background-position: center bottom; height: 200px; position: relative; }
+        .btn-junino { color: white; font-family: 'Lilita One', cursive; transition: all 0.3s ease; text-transform: uppercase; }
+        .btn-junino:hover { transform: translateY(-5px) scale(1.05); }
+        #enter-button {
+            background-color: #573A2E; border: 3px solid #FBBF24; border-radius: 10px;
+            padding: 1rem 2.5rem; font-size: 1.5rem; letter-spacing: 2px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+            animation: pulsate 2s infinite ease-in-out;
+        }
+        #enter-button:hover { background-color: #FBBF24; color: #372A22; animation-play-state: paused; }
+        @keyframes pulsate {
+            0% { transform: scale(1); box-shadow: 0 8px 15px rgba(0,0,0,0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 25px rgba(0,0,0,0.6); }
+            100% { transform: scale(1); box-shadow: 0 8px 15px rgba(0,0,0,0.5); }
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+        #video-overlay { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            background-color: rgba(0,0,0,0.6); z-index: 9999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 1s ease-out; 
+        }
+        #video-overlay video { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; z-index: -1; 
+        }
+
+        .bloco-chita-arredondado {
+            background-image: 
+                linear-gradient(rgba(10, 16, 51, 0.8), rgba(10, 16, 51, 0.8)),
+                url('chita.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .bloco-chita-arredondado p {
+            font-size: 1.25rem;
+            line-height: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        #confirmar-wpp-btn {
+            animation: pulsate 2.5s infinite ease-in-out;
+        }
+        #confirmar-wpp-btn:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-12">
+
+    <div id="video-overlay">
+        <video autoplay muted loop playsinline id="intro-video">
+            <source src="dança.mp4" type="video/mp4">
+        </video>
+        <button id="enter-button" class="btn-junino">Abrir a Porteira!</button>
+    </div>
+
+    <div class="max-w-2xl w-full rounded-2xl overflow-hidden card" id="main-card">
+        
+        <video autoplay loop muted playsinline class="w-full h-64 object-cover">
+            <source src="placa5.webm" type="video/webm">
+            Seu navegador não suporta vídeos.
+        </video>
+        
+        <div class="content-area p-6 md:p-8 space-y-8"> 
+            
+            <div class="text-center">
+                <img src="edicao-2025.png" alt="Edição 2025" class="mx-auto h-40 w-auto -mt-16">
+                <p class="text-2xl pt-4">Ocê tá convidado, sô!</p>
+            </div>
+            
+            <div class="info-card flex flex-col gap-6 text-center md:flex-row md:justify-around">
+                <div>
+                    <h3 class="title-font text-3xl mb-4">Data</h3>
+                    <p>Sábado, 12 de Julho</p>
+                </div>
+                <div>
+                    <h3 class="title-font text-3xl mb-4">Horário</h3>
+                    <p>A partir das 17:00</p>
+                </div>
+            </div>
+
+            <div class="info-card text-center">
+                <h3 class="title-font text-3xl mb-4">O que vai ter de bão?</h3>
+                <ul class="lista-junina text-left mx-auto max-w-sm mb-4">
+                    <li>Miio</li>
+                    <li>Pastê</li>
+                    <li>Caldin</li>
+                    <li>Cervêja</li>
+                </ul>
+                <p class="italic">...e muito mais!</p>
+            </div>
+
+            <div class="info-card text-center">
+                 <h3 class="title-font text-3xl mb-2">Vem a caráter!</h3>
+                 <p class="max-w-md mx-auto">Capriche na camisa xadrez, no vestido de chita e no chapéu de paia pra festança ficar ainda mais bonita!</p>
+            </div>
+
+            <div class="info-card text-center">
+                <h3 class="title-font text-3xl mb-4">Onde vai ser o Arraiá</h3>
+                <p class="max-w-md mx-auto mb-4">
+                    Estádio José Amorim (União Esportiva de Coelho da Rocha) 
+                </p>
+                <div class="rounded-lg overflow-hidden shadow-md h-64 border-2 border-yellow-400/50">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.9691459464673!2d-43.39803182390231!3d-22.766128032731545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9965d1d497c459%3A0x6b44743c458739cf!2sCampo%20do%20Uni%C3%A3o%20Esporte%20Clube!5e0!3m2!1spt-BR!2sbr!4v1717070119318!5m2!1spt-BR!2sbr" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                 <a href="https://www.google.com/maps/place/Av.+Ver.+Celso+Moreira+Guerra,+18+-+Parque+Alian,+S%C3%A3o+Jo%C3%A3o+de+Meriti+-+RJ,+25550-201/@-22.7750453,-43.3906328,493m/data=!3m1!1e3!4m6!3m5!1s0x9965ca5aaf826d:0xfa6988c6f8180dd5!8m2!3d-22.7749096!4d-43.3891541!16s%2Fg%2F11csd1kd0n?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="mt-4 inline-block text-lg font-bold text-yellow-300 hover:text-white transition-colors">
+                    <i class="fas fa-map-signs mr-2"></i>ABRIR NO MAPA
+                 </a>
+            </div>
+            
+            <div class="text-center pt-8">
+                <div class="rodape-casinhas"></div>
+                <div class="bloco-chita-arredondado -mt-4 p-6 rounded-2xl">
+                    <h3 class="title-font text-4xl mb-2">Confirme sua Presença!</h3>
+                    <p class="max-w-md mx-auto mb-6">Sua presença é o mió presente! Pra gente organizar a festança e não fartá comida pra ninguém, por favor, confirme até 15/06.</p>
+                    <a href="https://wa.me/+5521993109328?text=Eita%2C%20trem%20bão!%20Tô%20confirmado(a)%20no%20Anarriê%20da%20Grande%20Família!%20Já%20tô%20preparando%20meu%20chapéu%20de%20palha!%20🤠🔥" 
+                       target="_blank"
+                       id="confirmar-wpp-btn"
+                       class="btn-junino font-bold py-3 px-8 rounded-full inline-flex items-center text-lg bg-[#DC2626] border-2 border-yellow-300 hover:bg-red-700">
+                        <i class="fab fa-whatsapp text-2xl mr-3"></i> Confirmar no Zap
+                    </a>
+                    
+                    <!-- ▼▼▼ RODAPÉ MOVIDO E ESTILIZADO AQUI ▼▼▼ -->
+                    <footer class="text-white text-base text-center mt-6">
+                        feito com ❤️ por Brayn - Digital.<br>
+                        
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- O rodapé foi REMOVIDO daqui para evitar duplicidade -->
+        
+    </div>
+    
+    <audio id="background-music" src="musicaquad.mp3" loop></audio>
+
+    <div id="countdown-container" class="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm text-white p-3 z-20 shadow-lg text-center">
+        <div class="text-xs text-orange-300 tracking-widest mb-1">CONTAGEM PRO NOSSO ARRAIÁ</div>
+        <div id="countdown" class="font-bold flex items-center justify-center space-x-4 md:space-x-6"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoOverlay = document.getElementById('video-overlay');
+            const enterButton = document.getElementById('enter-button');
+            const mainContent = document.querySelector('.card');
+            const backgroundMusic = document.getElementById('background-music');
+
+            function triggerConfetti() {
+                confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#DC2626', '#FBBF24', '#2563EB', '#16A34A', '#FFFFFF'] });
+            }
+            
+            if (enterButton) {
+                enterButton.addEventListener('click', () => {
+                    backgroundMusic.play().catch(e => console.log("Música aguardando interação do usuário."));
+                    videoOverlay.style.opacity = '0';
+                    setTimeout(() => { videoOverlay.style.display = 'none'; }, 1000); 
+                    mainContent.style.opacity = '1';
+                    mainContent.classList.add('animate-fade-in');
+                    setTimeout(triggerConfetti, 500);
+                });
+            } else {
+                mainContent.style.opacity = '1';
+            }
+
+            const partyDateString = '2025-07-12T17:00:00-03:00'; 
+            const partyDateTime = new Date(partyDateString);
+            const countdownElement = document.getElementById("countdown");
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = partyDateTime - now;
+                if (distance < 0) {
+                    clearInterval(x);
+                    countdownElement.innerHTML = '<div class="text-center font-bold text-orange-300 text-lg">🎉 A FESTA COMEÇOU, SÔ! 🎉</div>';
+                    return;
+                }
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                countdownElement.innerHTML = `
+                    <div class="text-center"><div class="text-2xl md:text-3xl">${String(days).padStart(2, '0')}</div><div class="text-xs text-orange-400">DIAS</div></div><div class="text-2xl md:text-3xl text-orange-500">:</div>
+                    <div class="text-center"><div class="text-2xl md:text-3xl">${String(hours).padStart(2, '0')}</div><div class="text-xs text-orange-400">HORAS</div></div><div class="text-2xl md:text-3xl text-orange-500">:</div>
+                    <div class="text-center"><div class="text-2xl md:text-3xl">${String(minutes).padStart(2, '0')}</div><div class="text-xs text-orange-400">MIN</div></div><div class="text-2xl md:text-3xl text-orange-500">:</div>
+                    <div class="text-center"><div class="text-2xl md:text-3xl">${String(seconds).padStart(2, '0')}</div><div class="text-xs text-orange-400">SEG</div></div>`;
+            }, 1000);
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    backgroundMusic.pause();
+                } 
+                else if (mainContent.style.opacity === '1') {
+                    backgroundMusic.play().catch(e => console.log("A reprodução da música foi bloqueada pelo navegador."));
+                }
+            });
+        });
+    </script>
+</body> 
+</html>
